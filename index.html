@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EAP Daily | English Word of the Day</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #f72585;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+            --success-color: #4cc9f0;
+            --border-radius: 10px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--box-shadow);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo .acronym {
+            background-color: var(--accent-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 5px 0;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--success-color);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--success-color);
+            bottom: -5px;
+            left: 0;
+            border-radius: 3px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        main {
+            padding: 40px 0;
+            min-height: calc(100vh - 300px);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title h2 {
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .page-title p {
+            color: var(--gray-color);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Word of the Day Card */
+        .word-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            margin-bottom: 40px;
+            transition: var(--transition);
+        }
+
+        .word-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .word-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .word-title h3 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .word-date {
+            color: var(--gray-color);
+            font-weight: 500;
+        }
+
+        .word-pronunciation {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: var(--gray-color);
+        }
+
+        .pronunciation-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .pronunciation-btn:hover {
+            color: var(--accent-color);
+        }
+
+        .meaning-section, .example-section, .usage-section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--accent-color);
+        }
+
+        .meaning-text, .example-text {
+            background-color: #f8f9ff;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .example-text {
+            border-left-color: var(--accent-color);
+        }
+
+        .translation {
+            font-style: italic;
+            color: var(--secondary-color);
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #ddd;
+        }
+
+        .word-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .category-tag {
+            background-color: #e9ecef;
+            color: var(--dark-color);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+        }
+
+        .category-tag.ielts {
+            background-color: #e3f2fd;
+            color: var(--primary-color);
+        }
+
+        .category-tag.formal {
+            background-color: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        /* Previous Words Section */
+        .previous-words {
+            margin-top: 50px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-header h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .words-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .word-item {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .word-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .word-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .word-item p {
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .newsletter h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .newsletter p {
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 25px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 10px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background-color: #d63384;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--success-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #343a40;
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #343a40;
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form button {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .word-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 25px;
+                right: 20px;
+            }
+            
+            nav ul {
+                display: none;
+                width: 100%;
+                margin-top: 20px;
+            }
+            
+            nav ul.show {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .word-card {
+                padding: 20px;
+            }
+            
+            .page-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .newsletter {
+                padding: 30px 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div>
+                    <h1><span class="acronym">EAP</span> Daily</h1>
+                    <div class="tagline">English Acquisition Platform - Master English, One Word at a Time</div>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#" class="active">Word of the Day</a></li>
+                    <li><a href="#">Vocabulary Archive</a></li>
+                    <li><a href="#">IELTS Prep</a></li>
+                    <li><a href="#">Grammar Guide</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="page-title">
+            <h2>Word of the Day</h2>
+            <p>Expand your English vocabulary daily with our carefully selected words, complete with definitions, examples, and Uzbek translations.</p>
+        </div>
+
+        <!-- Word of the Day Card -->
+        <div class="word-card">
+            <div class="word-header">
+                <div class="word-title">
+                    <h3>in due course</h3>
+                </div>
+                <div class="word-date">
+                    <i class="far fa-calendar"></i> May 21, 2023
+                </div>
+            </div>
+            
+            <div class="word-pronunciation">
+                <span>/ɪn djuː kɔːrs/</span>
+                <button class="pronunciation-btn" id="pronunciationBtn">
+                    <i class="fas fa-volume-up"></i> Listen
+                </button>
+            </div>
+            
+            <div class="meaning-section">
+                <h3 class="section-title"><i class="fas fa-book-open"></i> Meaning</h3>
+                <div class="meaning-text">
+                    <p><strong>English:</strong> At the appropriate time; eventually; when the time is right.</p>
+                    <p class="translation"><strong>Uzbek:</strong> o'zining vaqti kelganda, to'g'ri vaqtda</p>
+                </div>
+            </div>
+            
+            <div class="example-section">
+                <h3 class="section-title"><i class="fas fa-comment-alt"></i> Example</h3>
+                <div class="example-text">
+                    <p><strong>English:</strong> If you still can't take an IELTS exam, don't worry. You will definitely do it in due course.</p>
+                    <p class="translation"><strong>Uzbek:</strong> Agar sen hali ham IELTS imtihonini topshira olmayotgan bo'lsang, qo'rqma. Vaqti kelib albatta topshirasan.</p>
+                </div>
+            </div>
+            
+            <div class="usage-section">
+                <h3 class="section-title"><i class="fas fa-lightbulb"></i> Usage Tips</h3>
+                <div class="meaning-text">
+                    <p>This phrase is formal and is often used in professional or academic contexts. It implies patience and trust in the natural progression of events.</p>
+                    <p><strong>Synonyms:</strong> eventually, in time, at the appropriate time, when the time is right</p>
+                </div>
+            </div>
+            
+            <div class="word-categories">
+                <span class="category-tag ielts">IELTS Vocabulary</span>
+                <span class="category-tag formal">Formal Expression</span>
+                <span class="category-tag">Idiom</span>
+                <span class="category-tag">Business English</span>
+            </div>
+        </div>
+
+        <!-- Previous Words Section -->
+        <div class="previous-words">
+            <div class="section-header">
+                <h3>Recent Words</h3>
+                <a href="#" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">View All →</a>
+            </div>
+            
+            <div class="words-grid" id="wordsGrid">
+                <!-- Words will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="newsletter">
+            <h3>Get Daily Words in Your Inbox</h3>
+            <p>Subscribe to our newsletter and receive a new English word with detailed explanation every day. Perfect for IELTS and Cambridge exam preparation.</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>EAP Daily</h4>
+                    <p>English Acquisition Platform helping Uzbek speakers master English vocabulary through daily words, examples, and translations.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Word of the Day</a></li>
+                        <li><a href="#">Vocabulary by Topic</a></li>
+                        <li><a href="#">IELTS Preparation</a></li>
+                        <li><a href="#">Grammar Lessons</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resource Categories</h4>
+                    <ul>
+                        <li><a href="#">Business English</a></li>
+                        <li><a href="#">Academic Vocabulary</a></li>
+                        <li><a href="#">Common Idioms</a></li>
+                        <li><a href="#">Phrasal Verbs</a></li>
+                        <li><a href="#">Pronunciation Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> hello@eapdaily.com</p>
+                    <p><i class="fas fa-globe"></i> www.eapdaily.com</p>
+                    <p>Designed for Uzbek English learners</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 EAP Daily - English Acquisition Platform. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('show');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Pronunciation Button
+        document.getElementById('pronunciationBtn').addEventListener('click', function() {
+            const utterance = new SpeechSynthesisUtterance("in due course");
+            utterance.lang = 'en-US';
+            utterance.rate = 0.8;
+            speechSynthesis.speak(utterance);
+            
+            // Visual feedback
+            this.innerHTML = '<i class="fas fa-volume-up"></i> Speaking...';
+            this.style.color = 'var(--accent-color)';
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-volume-up"></i> Listen';
+                this.style.color = '';
+            }, 1500);
+        });
+
+        // Previous Words Data
+        const previousWords = [
+            {
+                word: "Albeit",
+                pronunciation: "/ɔːlˈbiːɪt/",
+                meaning: "Although; even though",
+                uzbek: "garchi, ammo",
+                date: "May 20, 2023"
+            },
+            {
+                word: "Bolster",
+                pronunciation: "/ˈbəʊlstə/",
+                meaning: "To support or strengthen",
+                uzbek: "mustahkamlamoq, kuchaytirmoq",
+                date: "May 19, 2023"
+            },
+            {
+                word: "Plethora",
+                pronunciation: "/ˈplɛθərə/",
+                meaning: "A large or excessive amount",
+                uzbek: "kup, haddan tashqari kup",
+                date: "May 18, 2023"
+            },
+            {
+                word: "Delve into",
+                pronunciation: "/dɛlv ˈɪntuː/",
+                meaning: "To research or investigate deeply",
+                uzbek: "chuqur o'rganmoq",
+                date: "May 17, 2023"
+            },
+            {
+                word: "Setback",
+                pronunciation: "/ˈsɛtbæk/",
+                meaning: "A problem that makes progress more difficult",
+                uzbek: "to'siq, muvaffaqiyatsizlik",
+                date: "May 16, 2023"
+            },
+            {
+                word: "Take for granted",
+                pronunciation: "/teɪk fɔːr ˈɡrɑːntɪd/",
+                meaning: "To fail to appreciate something",
+                uzbek: "o'ziga ma'lum deb bilmoq",
+                date: "May 15, 2023"
+            }
+        ];
+
+        // Populate Previous Words
+        const wordsGrid = document.getElementById('wordsGrid');
+        
+        previousWords.forEach(word => {
+            const wordItem = document.createElement('div');
+            wordItem.className = 'word-item';
+            wordItem.innerHTML = `
+                <h4>${word.word}</h4>
+                <p><i>${word.pronunciation}</i></p>
+                <p>${word.meaning}</p>
+                <p><strong>Uzbek:</strong> ${word.uzbek}</p>
+                <div style="margin-top: 10px; font-size: 0.8rem; color: var(--gray-color);">
+                    <i class="far fa-calendar"></i> ${word.date}
+                </div>
+            `;
+            
+            // Add click event to show pronunciation
+            wordItem.addEventListener('click', function() {
+                const utterance = new SpeechSynthesisUtterance(word.word);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.8;
+                speechSynthesis.speak(utterance);
+                
+                // Visual feedback
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 300);
+            });
+            
+            wordsGrid.appendChild(wordItem);
+        });
+
+        // Newsletter Form Submission
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const emailInput = this.querySelector('input[type="email"]');
+            const email = emailInput.value;
+            
+            if (email) {
+                // In a real app, you would send this to a server
+                alert(`Thank you for subscribing with: ${email}\nYou'll receive your first word tomorrow!`);
+                emailInput.value = '';
+                
+                // Visual feedback
+                const button = this.querySelector('button');
+                const originalText = button.textContent;
+                button.textContent = 'Subscribed!';
+                button.style.backgroundColor = 'var(--success-color)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.backgroundColor = '';
+                }, 2000);
+            }
+        });
+
+        // Set today's date
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.querySelector('.word-date').innerHTML = `<i class="far fa-calendar"></i> ${today.toLocaleDateString('en-US', options)}`;
+    </script>
+</body>
+</html>
